@@ -25,6 +25,7 @@ import "./assets/css/animate.min.css";
 import "./assets/scss/light-bootstrap-dashboard-react.scss?v=2.0.0";
 import "./assets/css/demo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import 'leaflet/dist/leaflet.css';
 
 import AdminLayout from "layouts/Admin.js";
 
@@ -34,7 +35,7 @@ root.render(
   <BrowserRouter>
     <Switch>
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Redirect from="/" to="/admin/dashboard" />
+      <Redirect from="/" to="/admin/maps" />
     </Switch>
   </BrowserRouter>
 );

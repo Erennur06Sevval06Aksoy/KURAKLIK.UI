@@ -75,7 +75,7 @@ function Header() {
                 href="#pablo"
                 onClick={(e) => e.preventDefault()}
               >
-                <span className="no-icon">Account</span>
+                {/*<span className="no-icon">Account</span>*/}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
@@ -84,7 +84,7 @@ function Header() {
                 href="#pablo"
                 onClick={(e) => e.preventDefault()}
               >
-                <span className="no-icon">Log out</span>
+                {/*<span className="no-icon">Log out</span>*/}
               </Nav.Link>
             </Nav.Item>
           </Nav>
