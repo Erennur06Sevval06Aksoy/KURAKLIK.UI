@@ -68,9 +68,8 @@ export default function Locations() {
       <div style={{ display: 'flex', gap: 12 }}>
 
         <div style={{ flex: 1, height: '80vh' }}>
-          <MapContainer center={[38.5, 28.0]} zoom={7} style={{ height: '100%', width: '100%' }}>
+          <MapContainer center={[38.5, 28.0]} zoom={7} style={{ height: '100%', width: '100%' }} attributionControl={false} zoomControl={false}>
             <TileLayer
-                attribution='&copy; OpenStreetMap contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
