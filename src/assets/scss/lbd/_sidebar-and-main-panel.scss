@@ -9,8 +9,7 @@ body > .navbar-collapse{
     z-index: 1;
     color: #fff;
     font-weight: 200;
-    background-size: cover;
-    background-position: center center;
+    background-color: #1a1a1a;
 
     .sidebar-wrapper{
         position: relative;
@@ -30,8 +29,7 @@ body > .navbar-collapse{
         display: block;
         top: 0;
         left: 0;
-        background-size: cover;
-        background-position: center center;
+        background-color: #1a1a1a;
     }
 
     .logo{
