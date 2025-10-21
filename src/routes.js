@@ -19,6 +19,8 @@ import Dashboard from "views/Dashboard.js";
 import UserProfile from "views/UserProfile.js";
 import TableList from "views/TableList.js";
 import Maps from "views/Maps.js";
+import KuraklikRaporu from "views/Raporlar/KuraklikRaporu.js";
+import TarimsalRapor from "views/Raporlar/TarimsalRapor.js";
 
 const dashboardRoutes = [
   {
@@ -43,11 +45,24 @@ const dashboardRoutes = [
   //   layout: "/admin"
   // },
   {
-    path: "/table",
     name: "RAPORLAR",
     icon: "nc-icon nc-notes",
-    component: TableList,
-    layout: "/admin"
+    subRoutes: [
+      {
+        path: "/kuraklik-raporu",
+        name: "Kuraklık Raporu",
+        icon: "nc-icon nc-paper",
+        component: KuraklikRaporu,
+        layout: "/admin"
+      },
+      {
+        path: "/tarimsal-rapor",
+        name: "Tarımsal Rapor",
+        icon: "nc-icon nc-single-copy-04",
+        component: TarimsalRapor,
+        layout: "/admin"
+      }
+    ]
   },
 ];
 

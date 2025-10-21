@@ -15,17 +15,26 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { useLocation, NavLink } from "react-router-dom";
 
-import { Nav } from "react-bootstrap";
+import { Nav, Collapse } from "react-bootstrap";
 
 import logo from "assets/img/reactlogo.png";
 
 function Sidebar({ color, image, routes }) {
   const location = useLocation();
+  const [openMenus, setOpenMenus] = useState({});
+  
   const activeRoute = (routeName) => {
     return location.pathname.indexOf(routeName) > -1 ? "active" : "";
+  };
+
+  const toggleMenu = (menuName) => {
+    setOpenMenus(prev => ({
+      ...prev,
+      [menuName]: !prev[menuName]
+    }));
   };
   return (
     <div className="sidebar" data-image={image} data-color={color}>
@@ -51,7 +60,42 @@ function Sidebar({ color, image, routes }) {
         </div>
         <Nav>
           {routes.map((prop, key) => {
-            if (!prop.redirect)
+            if (!prop.redirect) {
+              // Eğer alt menüler varsa açılır menü olarak göster
+              if (prop.subRoutes && prop.subRoutes.length > 0) {
+                const isOpen = openMenus[prop.name] || false;
+                return (
+                  <li key={key}>
+                    <a
+                      className="nav-link"
+                      onClick={() => toggleMenu(prop.name)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <i className={prop.icon} />
+                      <p>{prop.name}</p>
+                      <i className={`nc-icon ${isOpen ? 'nc-minimal-up' : 'nc-minimal-down'}`} style={{ float: 'right', marginTop: '5px' }} />
+                    </a>
+                    <Collapse in={isOpen}>
+                      <div>
+                        {prop.subRoutes.map((subRoute, subKey) => (
+                          <NavLink
+                            key={subKey}
+                            to={subRoute.layout + subRoute.path}
+                            className="nav-link sub-nav-link"
+                            activeClassName="active"
+                            style={{ paddingLeft: '30px', fontSize: '14px' }}
+                          >
+                            <i className={subRoute.icon} />
+                            <p>{subRoute.name}</p>
+                          </NavLink>
+                        ))}
+                      </div>
+                    </Collapse>
+                  </li>
+                );
+              }
+              
+              // Normal menü öğesi
               return (
                 <li
                   className={
@@ -71,6 +115,7 @@ function Sidebar({ color, image, routes }) {
                   </NavLink>
                 </li>
               );
+            }
             return null;
           })}
         </Nav>

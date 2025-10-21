@@ -33,19 +33,35 @@ function Admin() {
   const location = useLocation();
   const mainPanel = React.useRef(null);
   const getRoutes = (routes) => {
-    return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
-        return (
+    const routeElements = [];
+
+    routes.forEach((prop, key) => {
+      if (prop.layout === "/admin" && prop.path && prop.component) {
+        routeElements.push(
           <Route
             path={prop.layout + prop.path}
             render={(props) => <prop.component {...props} />}
-            key={key}
+            key={`route-${key}`}
           />
         );
-      } else {
-        return null;
+      }
+
+      if (prop.subRoutes && Array.isArray(prop.subRoutes)) {
+        prop.subRoutes.forEach((subRoute, subKey) => {
+          if (subRoute.layout === "/admin" && subRoute.path && subRoute.component) {
+            routeElements.push(
+              <Route
+                path={subRoute.layout + subRoute.path}
+                render={(props) => <subRoute.component {...props} />}
+                key={`subroute-${key}-${subKey}`}
+              />
+            );
+          }
+        });
       }
     });
+
+    return routeElements;
   };
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
